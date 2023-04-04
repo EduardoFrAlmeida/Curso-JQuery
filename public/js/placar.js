@@ -1,8 +1,4 @@
-$('#botao-placar').click(mostraPlacar);
-
-function mostraPlacar() {
-    $(".placar").stop().slideToggle(600);
-}
+$("#botao-placar").click(mostraPlacar);
 
 function inserePlacar() {
     var corpoTabela = $(".placar").find("tbody");
@@ -13,12 +9,16 @@ function inserePlacar() {
     linha.find(".botao-remover").click(removeLinha);
 
     corpoTabela.append(linha);
-
     $(".placar").slideDown(500);
+    scrollPlacar();
 }
 
 function scrollPlacar() {
-    var posicaoPlacar = $(".placar").off
+    var posicaoPlacar = $(".placar").offset().top;
+    $("body").animate(
+    {
+        scrollTop: posicaoPlacar + "px"
+    }, 1000);
 }
 
 function novaLinha(usuario, palavras) {
@@ -49,4 +49,8 @@ function removeLinha() {
     setTimeout(function() {
         linha.remove();
     }, 1000);
+}
+
+function mostraPlacar() {
+    $(".placar").stop().slideToggle(600);
 }
